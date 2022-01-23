@@ -12,8 +12,8 @@ import Model.Person;
 public class AddressBookRepository {
 	
 	private List<Person> addressBooklist= new ArrayList<>();
-	int a=0;
-	int p=0;
+	
+	int s=0;
 	
 	public void savecontact(Person Person1) {
 		
@@ -57,7 +57,7 @@ public class AddressBookRepository {
 		return addressBooklist;
 	}
 	
-	public int updateRepository(Person person,String name)
+	public int updateRepository1(String firstname , String lastname)
 	{
 		int result=0;
 		Connection connection=AddressBookSql.getconnection();
@@ -66,41 +66,27 @@ public class AddressBookRepository {
 			Statement statement = connection.createStatement();
 			ResultSet resultset = statement.executeQuery(sql);
 			while(resultset.next()) {
-				 if(resultset.getString(2).equalsIgnoreCase(name))
-				  {
-					  a=2;
-					  p= resultset.getInt(1);
+				 if(resultset.getString(2).equalsIgnoreCase(firstname))
+				 {
+					 
+					  s= resultset.getInt(1);
 					  result=1;
 					  return result;
 				  }
 				 
-				 if(resultset.getString(3).equalsIgnoreCase(name))
+				 if(resultset.getString(3).equalsIgnoreCase(lastname))
 				  {
-					  a=3;
-					  p= resultset.getInt(1);
+					 
+					  s= resultset.getInt(1);
 					  result=1;
 					  return result;
 				  }
 				 
-				 if(resultset.getString(4).equalsIgnoreCase(name)) 
-				  {       
-					  a=4;
-					  p= resultset.getInt(1);						 
-					  result=1;
-					  return result;
-				  }
-				  if(resultset.getString(5).equalsIgnoreCase(name))
-				  {
-					   a=5;
-					   p= resultset.getInt(1);						 
-					   result=1;
-					   return result;
-				  }
-				 
-		      }
-	       
+			}
 		}
-		catch (SQLException e) {
+				 
+					 
+				 catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
@@ -108,17 +94,17 @@ public class AddressBookRepository {
    	return result;
  }
 
-	public int updateRepository(String data1, Person person)  {
+	public int updateRepository1(int ch,String name) {
 		int result=0;
 		Connection connection=AddressBookSql.getconnection();
-		if (a==2) {
+		if(ch==1)  {
 		
 		String sql= "update contacts set Firstname=? where id=?";
 		
 		try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setString(1, data1);
-				preparedStatement.setInt(2, p);
+				preparedStatement.setString(1, name);
+				preparedStatement.setInt(2, s);
 				preparedStatement.executeUpdate();
 				result=1;
 			
@@ -128,14 +114,14 @@ public class AddressBookRepository {
 				
 			}
 		}
-		if (a==3) {
+		if (ch==2) {
 			
 			String sql= "update contacts set lastname=? where id=?";
 			
 			try {
 					PreparedStatement preparedStatement=connection.prepareStatement(sql);
-					preparedStatement.setString(1, data1);
-					preparedStatement.setInt(2, p);
+					preparedStatement.setString(1, name);
+					preparedStatement.setInt(2, s);
 					preparedStatement.executeUpdate();
 					result=1;
 				
@@ -147,14 +133,14 @@ public class AddressBookRepository {
 			}
 		
 		
-			if (a==4) {
+			if (ch==3) {
 				
 				String sql2  = "update contacts set city=? where id=?";
 				
 				try {
 						PreparedStatement preparedStatement=connection.prepareStatement(sql2);
-						preparedStatement.setString(1, data1);
-						preparedStatement.setInt(2, p);
+						preparedStatement.setString(1, name);
+						preparedStatement.setInt(2, s);
 						preparedStatement.executeUpdate();
 						result=1;
 					
@@ -164,14 +150,14 @@ public class AddressBookRepository {
 					
 					}
 			}
-				if (a==5) {
+				if (ch==4) {
 					
 					String sql3 = "update contacts set phoneNumber=? where id=?";
 					
 				try {
 						PreparedStatement preparedStatement=connection.prepareStatement(sql3);
-						preparedStatement.setString(1, data1);
-						preparedStatement.setInt(2, p);
+						preparedStatement.setString(1, name);
+						preparedStatement.setInt(2, s);
 						preparedStatement.executeUpdate();
 						result=1;
 						
@@ -197,9 +183,9 @@ public class AddressBookRepository {
 					
 					  while(resultset.next()) 
 					  {
-						  if(resultset.getString(2).equalsIgnoreCase(name))
+						  if(resultset.getString(3).equalsIgnoreCase(name))
 						  {
-							  String sql1=String.format("delete from contacts where firstName=?");
+							  String sql1=String.format("delete from contacts where lastName=?");
 							  PreparedStatement preparedStatement=connection.prepareStatement(sql1);
 							  preparedStatement.setString(1, name);
 							  preparedStatement.executeUpdate();
@@ -213,5 +199,8 @@ public class AddressBookRepository {
 					return result;
 			}
 
-		}
+	
+	}
+
+		
 

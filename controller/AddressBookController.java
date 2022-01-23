@@ -18,16 +18,15 @@ public class AddressBookController {
 		return Service.viewcontactservice();
 	}
 
-	public int updateContact(Person person,String name)
+	 public int updateController(String firstname, String lastName)
 	{
-		 int result=Service.updateService(person,name);	
-		 return result;
+		int result =Service.updateService(firstname,lastName);
+		return result;
 	}
 
-
-	public int updateContact(String data1, Person person) 
+	public int updateController(int ch,String name) 
 	{
-		int result=Service.updateService(data1,person);	
+		int result=Service.updateService(ch,name);
 		return result;
 	}
 
@@ -37,6 +36,8 @@ public class AddressBookController {
 		 return result;
 		
 	}
+
+
 }
 	
 	

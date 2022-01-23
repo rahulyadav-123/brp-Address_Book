@@ -1,5 +1,6 @@
 package utility;
 
+import java.security.Provider.Service;
 import java.util.List;
 import java.util.Scanner;
 import Model.Person;
@@ -33,105 +34,69 @@ public class AddressBookClient {
 		}
 	}
 	public void update() {
-		
-		System.out.println("Update contact via\n 1-Firstname \n 2-lastname \n 3-City \n 4-phoneNumber");
-		int data=sc.nextInt();
-		switch(data){
-			      case 1: System.out.println("Enter First name of person");
-			              String name=sc.next();
-			              int result =addressBookController.updateContact(person,name);
-			              if(result==1) 
-			              {
-			      			    System.out.println("Enter New Data");
-			      			    String data1=sc.next();
-			      			    int r=addressBookController.updateContact(data1,person); 
-			      			    if(r==1) 
-			      			    {
-			      				      System.out.println(" Updated Successfully");
-			      			    }
-			      		  }
-			              else  {
-			      			System.out.println(name+" Name is not present in the list");
-			      		  }
-			              break;
-			      case 2: System.out.println("Enter lastname name of person");
-	              		  String name1=sc.next();
-	              		  int result1 =addressBookController.updateContact(person,name1);
-	              		  if(result1==1) 
-	              		{
-	              			  System.out.println("Enter New Data");
-	              			  String data1=sc.next();
-	              			  int r=addressBookController.updateContact(data1,person); 
-	              			  if(r==1) 
-	      			    {
-	      				      System.out.println(" Updated Successfully");
-	      			    }
-	      		  }
-	              else  {
-	      			System.out.println(name1+" Name is not present in the list");
-	      		  }
-	              break;
-	     
-			     
-			      case 3: System.out.println("Enter city of person");
-	                      String name2=sc.next();
-	                      int result2 =addressBookController.updateContact(person,name2);
-	                      if(result2==1) {
-	                    	   System.out.println("Enter New Data");
-			      			    String data1=sc.next();
-			      			    int r=addressBookController.updateContact(data1,person); 
-			      			    if(r==1) 
-			      			    {
-			      				      System.out.println(" Updated Successfully");
-			      			    }
-	               		    }
-	                       else
-	                       {
-	               			System.out.println(name2+" Name is not present in the list");
-	               		   }
+
+		System.out.println("Enter first name");
+		String firstName=sc.next();
+		System.out.println("Enter last name");
+		String lastName=sc.next();
+		int result=addressBookController.updateController(firstName,lastName);
+		if(result==1) {
+			System.out.println("Select field to update details");
+			System.out.println(" 1-FirstName\n 2-LastName\n 3-City\n 4-phoneNumber");
+			int ch =sc.nextInt();
+			switch(ch) {
+			case 1:System.out.println("Enter New Data");
+			       String name1=sc.next();
+			       int result1=addressBookController.updateController(ch,name1);
+			       if(result1==1) {
+			    	   System.out.println(" Updated SuccessFully");
+			       }
+			       break;
+					
+			case 2:System.out.println("Enter New Data");
+	                String name2=sc.next();
+	                int result2=addressBookController.updateController(ch,name2);
+	                if(result2==1){
+		    	        System.out.println(" Updated SuccessFully");
+		            }
 	                       break;
-			     
-			      case 4: System.out.println("Enter phoneNumber of person");
-                           String name3=sc.next();
-                           int result3 =addressBookController.updateContact(person,name3);
-                           if(result3==1)
-                           {
-                        	   System.out.println("Enter New Data");
-			      			   String data1=sc.next();
-			      			    if(utility.regex1(data1)==1)
-			      			    {
-			      			    	int r=addressBookController.updateContact(data1,person); 
-				      			    if(r==1)
-				      			    {
-				      				      System.out.println(" Updated Successfully");
-				      			    }
-			      			  }
-			      			  else 
-			      			    {
-			      			   	System.out.println("Enter proper phoneNumber upto 5-Digit");
-			      			    }
-			      			    
-                   		   }
-                           else
-                           {
-                   			System.out.println(name3+" PhoneNumber is not present in the list");
-                   		   }
-                           break;
-                           
-                  default:  System.out.println("Inavalid Choice");
-		  }
+			case 3:System.out.println("Enter New Data");
+		               String city=sc.next();
+		               int result3=addressBookController.updateController(ch,city);
+		               if(result3==1) {
+			    	   System.out.println(" Updated SuccessFully");
+			       }
+		               break;
+			case 4:System.out.println("Enter New Data");
+	                       String phoneNumber=sc.next();
+	                       if(utility.regex1(phoneNumber)==1) {
+	                         int result4=addressBookController.updateController(ch,phoneNumber);
+	                         if(result4==1)
+	                      {
+			    	        System.out.println("Updated SuccessFully");
+			             }
+	                       }else {
+	            	             System.out.println("Invalid PhoneNumber Enter Upto 5 digit");
+	                       }
+	                       break;
+	                       default:System.out.println("Invalid Choice");
+			}
+		}
+		else {
+			System.out.println("Invalid choice");
+		     }
+
 	}
-		
 		
 
 	public void delete()
 	{
-	System.out.println("Enter FirstName of person to Delete contact");
-	String name=sc.next();
-	int result=addressBookController.deletecontact(person,name);
-	if(result==1) {
+		System.out.println("Enter lastname of person to Delete contact");
+		String name=sc.next();
+		int result=addressBookController.deletecontact(person,name);
+		if(result==1) {
 		System.out.println(" Deleted Successfully");
-	}else {
+		}else {
 		System.out.println(name+" Name is not present in the list");
 	}
 	
